@@ -76,21 +76,18 @@
     /* ---------- HERO ---------- */
     .hero {
       position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      padding: 24px 0 50px;
       overflow: hidden;
-      background: var(--ink);
+      background: #FDFBF8;
     }
 
     .hero-video-frame {
       position: absolute;
       inset: 0;
       overflow: hidden;
-      background:
-        radial-gradient(120% 90% at 20% 10%, #3a1210 0%, transparent 55%),
-        linear-gradient(135deg, #1c0f0c 0%, #2a1512 45%, #150a08 100%);
+      z-index: 1;
+      opacity: 0.9;
+      pointer-events: none;
     }
 
     .hero-video-frame video {
@@ -99,10 +96,9 @@
       left: 50%;
       width: 100vw;
       height: 56.25vw;
-      /* 16:9 fill */
-      min-height: 100vh;
-      min-width: 177.78vh;
-      transform: translate(-50%, -50%) scale(1.18);
+      min-height: 100%;
+      min-width: 100%;
+      transform: translate(-50%, -50%);
       pointer-events: none;
       border: 0;
       object-fit: cover;
@@ -111,91 +107,125 @@
     .hero-scrim {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(180deg, rgba(20, 10, 8, 0.55) 0%, rgba(20, 10, 8, 0.35) 35%, rgba(20, 10, 8, 0.88) 100%);
-      z-index: 1;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.6) 42%, rgba(255, 255, 255, 0.15) 80%, rgba(255, 255, 255, 0.05) 100%);
+      z-index: 2;
+    }
+
+    .hero-inner-container {
+      position: relative;
+      z-index: 3;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
     .topbar {
-      position: relative;
-      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 22px 28px;
-    }
-
-    .brandmark {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brandmark .badge {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: var(--red);
-      border: 2px solid var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 18px;
-      color: var(--white);
-      flex-shrink: 0;
-    }
-
-    .brandmark .name {
-      color: var(--white);
-      font-weight: 700;
-      font-size: 19px;
-      letter-spacing: 0.3px;
-    }
-
-    .brandmark .sub {
-      color: rgba(255, 255, 255, 0.75);
-      font-size: 13px;
+      margin-bottom: 28px;
     }
 
     .topbar .call-pill {
       background: var(--red);
       color: var(--white);
-      padding: 10px 20px;
+      padding: 10px 24px;
       border-radius: 999px;
       font-weight: 700;
-      font-size: 14px;
-      box-shadow: 0 6px 18px rgba(193, 39, 45, 0.4);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 28px 72px;
-      max-width: 820px;
-    }
-
-    .hero-content .eyebrow-line {
-      color: var(--gold);
-      font-weight: 700;
       font-size: 15px;
-      margin-bottom: 14px;
+      box-shadow: 0 6px 18px rgba(193, 39, 45, 0.35);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .hero-content h1 {
-      color: var(--white);
-      font-weight: 900;
-      font-size: clamp(34px, 6vw, 60px);
-      line-height: 1.18;
-      margin-bottom: 20px;
-      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+    .topbar .call-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(193, 39, 45, 0.45);
     }
 
-    .hero-content p {
-      color: rgba(255, 255, 255, 0.88);
-      font-size: clamp(16px, 2.2vw, 19px);
+    .hero-main-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 36px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-main-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
+    .hero-left-content {
       max-width: 600px;
-      margin-bottom: 32px;
+    }
+
+    .hero-brandmark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .hero-brandmark .badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--red);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 19px;
+      box-shadow: 0 4px 12px rgba(193, 39, 45, 0.28);
+      flex-shrink: 0;
+    }
+
+    .hero-brandmark .name {
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .hero-brandmark .sub {
+      color: #6d5b54;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .hero-kicker {
+      color: var(--red);
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      color: var(--ink);
+      font-weight: 900;
+      font-size: clamp(32px, 4.2vw, 48px);
+      line-height: 1.22;
+      margin-bottom: 18px;
+    }
+
+    .hero-title .highlight-red {
+      color: var(--red);
+      display: block;
+    }
+
+    .hero-desc {
+      color: #55443d;
+      font-size: 16.5px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 520px;
     }
 
     .hero-ctas {
@@ -208,32 +238,150 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 15px 28px;
-      border-radius: 10px;
+      padding: 13px 26px;
+      border-radius: 12px;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 15.5px;
       cursor: pointer;
-      border: 2px solid transparent;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .btn-primary {
       background: var(--red);
       color: var(--white);
-      box-shadow: 0 10px 26px rgba(193, 39, 45, 0.45);
+      box-shadow: 0 8px 22px rgba(193, 39, 45, 0.35);
+      border: 1px solid var(--red);
     }
 
-    .btn-ghost {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--white);
-      border-color: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(4px);
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(193, 39, 45, 0.45);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--ink);
+      border: 1px solid rgba(34, 21, 16, 0.15);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: rgba(193, 39, 45, 0.3);
+      color: var(--red);
+    }
+
+    .hero-product-showcase {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-product-showcase img.hero-trio-img {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.12));
+      transition: transform 0.3s ease;
+    }
+
+    .hero-product-showcase:hover img.hero-trio-img {
+      transform: scale(1.03);
+    }
+
+    /* Hero Floating Trust Bar */
+    .hero-trust-bar {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      box-shadow: 0 10px 32px rgba(34, 21, 16, 0.06);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-trust-bar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 22px 24px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-trust-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-trust-item .trust-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--red);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(193, 39, 45, 0.25);
+    }
+
+    .hero-trust-item .trust-icon.amul-round-icon {
+      background: var(--red);
+      font-family: Georgia, serif;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-trust-item .trust-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .hero-trust-item .trust-text span {
+      display: block;
+      font-size: 13px;
+      color: #665b55;
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+
+    .trust-divider {
+      width: 1px;
+      height: 38px;
+      background: rgba(34, 21, 16, 0.1);
+    }
+
+    @media (max-width: 900px) {
+      .trust-divider {
+        display: none;
+      }
     }
 
     /* ---------- STATS ---------- */
     .stats {
       position: relative;
       z-index: 20;
-      margin-top: -42px;
+      margin-top: 50px;
       padding-bottom: 24px;
     }
 
@@ -362,82 +510,311 @@
       }
     }
 
-    /* ---------- SERVICES ---------- */
+    /* ---------- SERVICES SECTION ---------- */
     .services {
-      background: var(--cream);
+      background: #FAF8F5;
+      padding: 70px 0 50px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .section-head {
-      max-width: 640px;
-      margin-bottom: 52px;
+    .services-top-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 48px;
     }
 
-    .section-head .kicker {
+    .services-header-left {
+      max-width: 600px;
+    }
+
+    .services-header-left .kicker {
       color: var(--red);
-      font-weight: 700;
       font-size: 15px;
-      margin-bottom: 10px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .section-head h2 {
-      font-weight: 800;
-      font-size: clamp(26px, 4vw, 36px);
-      line-height: 1.3;
+    .services-header-left h2 {
+      font-size: clamp(28px, 3.8vw, 40px);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.28;
+    }
+
+    .services-header-left .red-bar-accent {
+      width: 48px;
+      height: 4px;
+      background: var(--red);
+      border-radius: 2px;
+      margin-top: 14px;
+    }
+
+    .services-header-right {
+      flex-shrink: 0;
+      max-width: 480px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .services-header-right img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    @media (max-width: 900px) {
+      .services-top-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .services-header-right {
+        max-width: 100%;
+        margin-top: 12px;
+      }
     }
 
     .service-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 26px;
+      margin-bottom: 48px;
     }
 
-    @media (max-width:820px) {
+    @media (max-width: 860px) {
       .service-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
       }
     }
 
     .service-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 32px 26px;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 24px;
+      padding: 30px 28px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(34, 21, 16, 0.04);
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+      min-height: 380px;
     }
 
-    .service-card .mark {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: rgba(193, 39, 45, 0.09);
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(193, 39, 45, 0.12);
+      border-color: rgba(193, 39, 45, 0.25);
+    }
+
+    .service-card .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #FFF1F1;
       color: var(--red);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      font-size: 20px;
+      font-size: 22px;
       margin-bottom: 20px;
+      transition: transform 0.25s ease;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.1);
+      background: var(--red);
+      color: #ffffff;
     }
 
     .service-card h3 {
-      font-weight: 700;
-      font-size: 19px;
-      margin-bottom: 10px;
+      font-weight: 800;
+      font-size: 21px;
+      color: var(--ink);
+      margin-bottom: 12px;
     }
 
     .service-card p {
-      color: var(--ink-soft);
-      font-size: 15px;
+      color: #554843;
+      font-size: 15.5px;
+      line-height: 1.6;
+      margin-bottom: 18px;
     }
 
-    /* ---------- PRODUCTS ---------- */
+    .service-card .card-body-bottom {
+      position: relative;
+      margin-top: auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      min-height: 110px;
+    }
+
+    .service-card .service-card-art-img {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 105px;
+      width: auto;
+      max-width: 65%;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover .service-card-art-img {
+      transform: scale(1.06);
+    }
+
+    .service-card .service-arrow-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(193, 39, 45, 0.35);
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: all 0.2s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-card:hover .service-arrow-btn {
+      background: var(--red);
+      color: #ffffff;
+      border-color: var(--red);
+      transform: translateX(4px);
+    }
+
+    .service-card .card-bottom-wave {
+      height: 14px;
+      background: var(--red);
+      margin: 0 -28px;
+      border-radius: 4px 4px 0 0;
+    }
+
+    /* Services Bottom Trust Pill */
+    .services-trust-pill {
+      background: #ffffff;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      box-shadow: 0 10px 32px rgba(34, 21, 16, 0.05);
+      padding: 16px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 860px) {
+      .services-trust-pill {
+        flex-direction: column;
+        border-radius: 20px;
+        padding: 22px 24px;
+        align-items: flex-start;
+      }
+    }
+
+    .pill-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .pill-feature-item .pill-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--red);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(193, 39, 45, 0.25);
+    }
+
+    .pill-feature-item .pill-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .pill-feature-item .pill-text span {
+      display: block;
+      font-size: 13px;
+      color: #665b55;
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+
+    .pill-divider-line {
+      width: 1px;
+      height: 38px;
+      background: rgba(34, 21, 16, 0.1);
+    }
+
+    @media (max-width: 860px) {
+      .pill-divider-line {
+        display: none;
+      }
+    }
+
+    /* ---------- PRODUCTS SECTION ---------- */
     .products {
-      background: var(--cream);
+      background: #FAF8F5;
+      position: relative;
+      overflow: hidden;
+      padding: 70px 0 0;
+    }
+
+    .products .wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    .products-header {
+      margin-bottom: 36px;
+    }
+
+    .products-header .kicker {
+      color: var(--red);
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .products-header h2 {
+      font-size: clamp(30px, 4vw, 42px);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.28;
     }
 
     .product-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 22px;
+      margin-bottom: 60px;
     }
 
     @media (max-width:960px) {
@@ -447,7 +824,7 @@
       }
     }
 
-    @media (max-width:600px) {
+    @media (max-width:620px) {
       .product-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
@@ -455,38 +832,43 @@
     }
 
     .product-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px 14px 16px;
-      text-align: center;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 20px;
+      padding: 16px 18px 14px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: space-between;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-      box-shadow: 0 4px 14px rgba(34, 21, 16, 0.05);
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+      box-shadow: 0 8px 24px rgba(34, 21, 16, 0.04);
       position: relative;
+      cursor: pointer;
     }
 
     .product-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 14px 28px rgba(193, 39, 45, 0.14);
-      border-color: rgba(193, 39, 45, 0.3);
+      box-shadow: 0 16px 36px rgba(193, 39, 45, 0.12);
+      border-color: rgba(193, 39, 45, 0.25);
+    }
+
+    .product-card .card-top-icon {
+      font-size: 18px;
+      color: var(--red);
+      opacity: 0.85;
+      margin-bottom: 4px;
+      display: inline-flex;
     }
 
     .product-card .img-wrap {
       width: 100%;
-      height: 120px;
+      height: 145px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 12px;
-      background: #faf7f2;
-      border-radius: 14px;
-      padding: 10px;
+      margin: 4px 0 12px;
+      padding: 6px;
       box-sizing: border-box;
-      overflow: hidden;
+      position: relative;
     }
 
     .product-card .img-wrap img {
@@ -497,159 +879,473 @@
       object-fit: contain;
       display: block;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.09));
     }
 
     .product-card:hover .img-wrap img {
       transform: scale(1.12);
     }
 
-    .product-card h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-top: 2px;
-    }
-
-    /* ---------- TRUST STRIP ---------- */
-    .trust {
-      background: var(--white);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .trust .wrap {
+    .product-card .card-footer {
       display: flex;
       align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
       justify-content: space-between;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      padding-top: 10px;
     }
 
-    .trust p {
-      font-weight: 600;
+    .product-card .card-footer h3 {
+      font-size: 16.5px;
+      font-weight: 800;
       color: var(--ink);
+      margin: 0;
+    }
+
+    .product-card .card-footer .arrow-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid rgba(193, 39, 45, 0.35);
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .product-card:hover .card-footer .arrow-icon {
+      background: var(--red);
+      color: #ffffff;
+      border-color: var(--red);
+      transform: translateX(2px);
+    }
+
+    /* Products Bottom Banner */
+    .products-bottom-strip {
+      background: linear-gradient(135deg, #C1272D 0%, #90161B 100%);
+      border-radius: 40px 40px 0 0;
+      padding: 24px 24px;
+      position: relative;
+      z-index: 3;
+      text-align: right;
+      box-shadow: 0 -10px 30px rgba(193, 39, 45, 0.18);
+    }
+
+    .products-bottom-strip .banner-text {
+      max-width: 1140px;
+      margin: 0 auto;
+      color: #ffffff;
       font-size: 16px;
-      max-width: 560px;
-    }
-
-    .trust .tag {
-      background: rgba(232, 163, 61, 0.15);
-      color: #8A5A0F;
-      padding: 8px 16px;
-      border-radius: 999px;
       font-weight: 700;
-      font-size: 13.5px;
-      white-space: nowrap;
+      letter-spacing: 0.3px;
     }
 
-    /* ---------- CONTACT ---------- */
-    .contact {
-      background: var(--ink);
-    }
-
-    .contact .section-head h2,
-    .contact .section-head .kicker {
-      color: var(--white);
-    }
-
-    .contact .section-head .kicker {
-      color: var(--gold);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 36px;
-    }
-
-    @media (max-width:820px) {
-      .contact-grid {
-        grid-template-columns: 1fr;
+    @media (max-width: 600px) {
+      .products-bottom-strip {
+        text-align: center;
       }
     }
 
-    .contact-cards {
+    /* ---------- FOOTER & CONTACT SECTION ---------- */
+    .footer-section {
+      background: #FAF8F5;
+      position: relative;
+      overflow: hidden;
+      padding-top: 70px;
+    }
+
+    .footer-section .wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    .farm-sketch-bg {
+      position: absolute;
+      bottom: 120px;
+      left: 20px;
+      width: 480px;
+      max-width: 44vw;
+      opacity: 0.85;
+      pointer-events: none;
+      z-index: 1;
+      mix-blend-mode: multiply;
+    }
+
+    .amul-brand-badge {
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+
+    .amul-brand-badge .badge-box {
+      background: var(--red);
+      color: #ffffff;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 900;
+      font-size: 24px;
+      padding: 6px 18px 4px;
+      border-radius: 8px;
+      display: inline-block;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(193, 39, 45, 0.25);
+    }
+
+    .amul-brand-badge .badge-line {
+      display: block;
+      height: 4px;
+      background: #008744;
+      margin-top: 4px;
+      border-radius: 2px;
+      width: 100%;
+    }
+
+    .footer-header {
+      margin-bottom: 36px;
+    }
+
+    .footer-header .kicker {
+      color: var(--red);
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .footer-header h2 {
+      font-size: clamp(30px, 4vw, 42px);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.28;
+    }
+
+    .footer-header .highlight-call {
+      color: var(--red);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+
+    .burst-rays {
+      display: inline-flex;
+      gap: 4px;
+      position: relative;
+      top: -12px;
+    }
+
+    .burst-rays span {
+      display: block;
+      width: 4px;
+      background: var(--red);
+      border-radius: 2px;
+    }
+
+    .burst-rays span:nth-child(1) {
+      height: 9px;
+      transform: rotate(-35deg);
+    }
+
+    .burst-rays span:nth-child(2) {
+      height: 15px;
+      transform: rotate(-15deg);
+    }
+
+    .burst-rays span:nth-child(3) {
+      height: 11px;
+      transform: rotate(15deg);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 44px;
+      align-items: start;
+      margin-bottom: 50px;
+    }
+
+    @media (max-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .farm-sketch-bg {
+        display: none;
+      }
+    }
+
+    .contact-cards-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
     }
 
-    .person-card {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 14px;
-      padding: 22px 24px;
+    .contact-card-item {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 22px;
+      padding: 20px 24px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: 0 10px 28px rgba(34, 21, 16, 0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .person-card .who {
-      color: var(--white);
+    .contact-card-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(193, 39, 45, 0.12);
+      border-color: rgba(193, 39, 45, 0.2);
     }
 
-    .person-card .who .role {
-      color: rgba(255, 255, 255, 0.6);
+    .contact-card-item .user-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #FFF1F1;
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .contact-card-item .user-meta {
+      flex-grow: 1;
+    }
+
+    .contact-card-item .user-meta .role-tag {
       font-size: 13px;
+      color: #888;
+      font-weight: 700;
+      margin-bottom: 2px;
+      display: block;
+    }
+
+    .contact-card-item .user-meta .user-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ink);
       margin-bottom: 4px;
     }
 
-    .person-card .who .name {
-      font-weight: 700;
-      font-size: 18px;
+    .contact-card-item .user-meta .phone-num {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18.5px;
+      font-weight: 800;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease;
     }
 
-    .person-card a.call {
+    .contact-card-item .user-meta .phone-num i {
+      color: var(--red);
+      font-size: 16px;
+    }
+
+    .contact-card-item .user-meta .phone-num:hover {
+      color: var(--red);
+    }
+
+    .contact-card-item .call-action-btn {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #C1272D 0%, #9E181D 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(193, 39, 45, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .contact-card-item .call-action-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 12px 24px rgba(193, 39, 45, 0.45);
+    }
+
+    .dealer-showcase-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 28px;
+      padding: 32px 32px 24px;
+      box-shadow: 0 16px 40px rgba(34, 21, 16, 0.06);
+      position: relative;
+      z-index: 2;
+    }
+
+    .dealer-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .dealer-header .store-icon-badge {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
       background: var(--red);
-      color: var(--white);
-      padding: 11px 20px;
-      border-radius: 10px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 6px 16px rgba(193, 39, 45, 0.3);
+    }
+
+    .dealer-header h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .dealer-address {
+      font-size: 16px;
+      line-height: 1.65;
+      color: #443b37;
+      margin-bottom: 20px;
+    }
+
+    .dealer-directions-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      background: #FAF8F5;
+      border: 1px solid rgba(34, 21, 16, 0.18);
+      border-radius: 12px;
+      color: var(--ink);
       font-weight: 700;
-      font-size: 15px;
-      white-space: nowrap;
-    }
-
-    .address-box {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 14px;
-      padding: 28px 26px;
-      color: var(--white);
-    }
-
-    .address-box .lbl {
-      color: var(--gold);
-      font-weight: 700;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-
-    .address-box p {
-      font-size: 16.5px;
-      line-height: 1.7;
-      color: rgba(255, 255, 255, 0.92);
-    }
-
-    .address-box .directions {
-      display: inline-block;
-      margin-top: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      color: var(--white);
-      padding: 11px 20px;
-      border-radius: 10px;
-      font-weight: 600;
       font-size: 14.5px;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
 
-    footer {
-      background: var(--red-deep);
-      color: rgba(255, 255, 255, 0.75);
+    .dealer-directions-btn i {
+      color: var(--red);
+    }
+
+    .dealer-directions-btn:hover {
+      background: var(--red);
+      color: #ffffff;
+      border-color: var(--red);
+    }
+
+    .dealer-directions-btn:hover i {
+      color: #ffffff;
+    }
+
+    .dealer-divider {
+      border: none;
+      border-top: 1.5px dashed rgba(34, 21, 16, 0.15);
+      margin: 24px 0 16px;
+    }
+
+    .product-showcase-box {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .product-showcase-box img {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.08));
+      transition: transform 0.3s ease;
+    }
+
+    .dealer-showcase-card:hover .product-showcase-box img {
+      transform: scale(1.03);
+    }
+
+    .bottom-red-strip {
+      background: linear-gradient(135deg, #C1272D 0%, #90161B 100%);
+      border-radius: 40px 40px 0 0;
+      padding: 40px 24px 30px;
+      position: relative;
+      z-index: 3;
+      box-shadow: 0 -10px 30px rgba(193, 39, 45, 0.18);
+    }
+
+    .trust-features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1140px;
+      margin: 0 auto 30px;
+    }
+
+    @media (max-width: 900px) {
+      .trust-features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .trust-features-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    .feature-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #ffffff;
+    }
+
+    .feature-badge-item .icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .feature-badge-item .badge-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .feature-badge-item .badge-text span {
+      display: block;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+
+    .site-footer-bottom {
       text-align: center;
-      padding: 26px 20px;
+      color: rgba(255, 255, 255, 0.7);
       font-size: 13.5px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 22px;
+      max-width: 1140px;
+      margin: 0 auto;
     }
 
     /* Mobile sticky call bar */
@@ -686,6 +1382,7 @@
 
   <!-- HERO -->
   <div class="hero">
+    <!-- Background Video -->
     <div class="hero-video-frame" id="videoFrame">
       <video autoplay muted loop playsinline>
         <source src="4315-178218581_medium.mp4" type="video/mp4">
@@ -693,24 +1390,103 @@
     </div>
     <div class="hero-scrim"></div>
 
-    <div class="topbar">
-      <div class="brandmark">
-        <div class="badge">અ</div>
-        <div>
-          <div class="name">અમૂલ પાર્લર</div>
-          <div class="sub">ઉનાવા · ઊંઝા</div>
+    <div class="hero-inner-container">
+      <!-- Topbar Header -->
+      <div class="topbar">
+        <!-- Amul Badge -->
+        <div class="amul-brand-badge">
+          <div class="badge-box">Amul</div>
+          <span class="badge-line"></span>
+        </div>
+        <a class="call-pill" href="tel:+919726017170">
+          <i class="fa-solid fa-phone"></i> કોલ કરો
+        </a>
+      </div>
+
+      <!-- Hero Main 2-Column Grid -->
+      <div class="hero-main-grid">
+        <!-- Left Column -->
+        <div class="hero-left-content">
+          <div class="hero-brandmark">
+            <div class="badge">અ</div>
+            <div>
+              <div class="name">અમૂલ પાર્લર</div>
+              <div class="sub">ઉનાવા · ઊંઝા</div>
+            </div>
+          </div>
+
+          <div class="hero-kicker">
+            ઉનાવા (ઊંઝા) બસ સ્ટોપ પાસે આવેલું અમૂલ પાર્લર
+          </div>
+
+          <h1 class="hero-title">
+            દરેક ઉજવણી માટે <br>
+            <span class="highlight-red">ભરોસાપાત્ર અમૂલ ડેરી ડીલર</span>
+          </h1>
+
+          <p class="hero-desc">
+            ઇવેન્ટ, લગ્ન પ્રસંગો અને પદયાત્રા સંઘ માટે તાજા અમૂલ ઉત્પાદનોનો સમયસર અને વિશ્વસનીય પુરવઠો.
+          </p>
+
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="tel:+919726017170">
+              <i class="fa-solid fa-phone"></i> હમણાં કૉલ કરો
+            </a>
+            <a class="btn btn-secondary" href="#contact">
+              <i class="fa-solid fa-location-dot"></i> સરનામું જુઓ
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Product Showcase Trio -->
+        <div class="hero-product-showcase">
+          <img src="amulimage/footer.png" alt="Amul Products Trio" class="hero-trio-img">
         </div>
       </div>
-      <a class="call-pill" href="tel:+919726017170">કૉલ કરો</a>
-    </div>
 
-    <div class="hero-content">
-      <div class="eyebrow-line">ઉનાવા (ઊંઝા) બસ સ્ટોપ પાસે અધિકૃત અમૂલ પાર્લર</div>
-      <h1>દરેક ઉજવણી માટે<br>ભરોસાપાત્ર અમૂલ ડેરી ડીલર</h1>
-      <p>ઇવેન્ટ, લગ્ન પ્રસંગો અને પદયાત્રા સંઘ માટે તાજા અમૂલ ઉત્પાદનોનો સમયસર અને વિશ્વસનીય પુરવઠો.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="tel:+919726017170"> <i class="fa-solid fa-phone"></i> હમણાં કૉલ કરો</a>
-        <a class="btn btn-ghost" href="#contact"><i class="fa-solid fa-location-dot"></i> સરનામું જુઓ</a>
+      <!-- Floating Bottom Trust Bar -->
+      <div class="hero-trust-bar">
+        <!-- Trust 1 -->
+        <div class="hero-trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="trust-text">
+            <strong>100% ગુણવત્તાયુક્ત</strong>
+            <span>વિશ્વાસરૂપ અમૂલ ગુણવત્તા</span>
+          </div>
+        </div>
+
+        <div class="trust-divider"></div>
+
+        <!-- Trust 2 -->
+        <div class="hero-trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-truck"></i></div>
+          <div class="trust-text">
+            <strong>સમયસર ડિલિવરી</strong>
+            <span>સચોટ અને સમયસર સેવા</span>
+          </div>
+        </div>
+
+        <div class="trust-divider"></div>
+
+        <!-- Trust 3 -->
+        <div class="hero-trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-headset"></i></div>
+          <div class="trust-text">
+            <strong>ગ્રાહક સહાય ઉપલબ્ધ</strong>
+            <span>અમારી ટીમ હંમેશા તમારી સાથે</span>
+          </div>
+        </div>
+
+        <div class="trust-divider"></div>
+
+        <!-- Trust 4 -->
+        <div class="hero-trust-item">
+          <div class="trust-icon amul-round-icon"><span>Amul</span></div>
+          <div class="trust-text">
+            <strong>અમૂલનો વિશ્વાસ</strong>
+            <span>શુદ્ધતા, સ્વાદ અને સ્વાસ્થ્ય</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -739,164 +1515,452 @@
     </div>
   </div>
 
-  <!-- SERVICES -->
+  <!-- SERVICES SECTION -->
   <section class="services">
     <div class="wrap">
-      <div class="section-head">
-        <div class="kicker">અમારી સેવાઓ</div>
-        <h2>નાના ઓર્ડરથી લઈને મોટા સમારંભ સુધી, દરેક જરૂરિયાત માટે તૈયાર</h2>
+      <!-- Top Brand & Header with Cow & Farm Background Image -->
+      <div class="services-top-header">
+        <div class="services-header-left">
+          <!-- Amul Badge -->
+          <div class="amul-brand-badge">
+            <div class="badge-box">Amul</div>
+            <span class="badge-line"></span>
+          </div>
+
+          <div class="kicker">
+            અમારી સેવાઓ
+            <span class="burst-rays"><span></span><span></span><span></span></span>
+          </div>
+
+          <h2>નાના ઓર્ડરથી લઈને <br>મોટા સમારંભ સુધી, <br>
+            <span class="highlight-call">દરેક જરૂરિયાત માટે તૈયાર
+              <span class="burst-rays"><span></span><span></span><span></span></span>
+            </span>
+          </h2>
+          <div class="red-bar-accent"></div>
+        </div>
+
+        <!-- Top Right Cow & Farm Hero Illustration Image -->
+        <div class="services-header-right">
+          <img src="amulimage/bg-22imges.png" alt="Amul Dairy Farm & Cow Illustration">
+        </div>
       </div>
+
+      <!-- 3 Service Cards Grid -->
       <div class="service-grid">
+        <!-- Service 1: Event Supply -->
         <div class="service-card">
-          <div class="mark"><i class="fa-solid fa-calendar-days"></i></div>
-          <h3>ઇવેન્ટ સપ્લાય</h3>
-          <p>જાહેર કાર્યક્રમો અને સમારંભો માટે અમૂલ ઉત્પાદનોનો બલ્ક અને સમયસર પુરવઠો.</p>
+          <div class="card-content-top">
+            <div class="service-icon"><i class="fa-regular fa-calendar-days"></i></div>
+            <h3>ઈવેન્ટ સપ્લાય</h3>
+            <p>જાહેર કાર્યક્રમો અને સમારંભો માટે અમૂલ ઉત્પાદનોનો બહોળા અને સમયસર પુરવઠો.</p>
+          </div>
+          <div class="card-body-bottom">
+            <span class="service-arrow-btn"><i class="fa-solid fa-arrow-right"></i></span>
+            <img src="amulimage/ઈવેન્ટ સપ્લાય.png" alt="ઈવેન્ટ સપ્લાય" class="service-card-art-img">
+          </div>
+          <div class="card-bottom-wave"></div>
         </div>
+
+        <!-- Service 2: Wedding Events -->
         <div class="service-card">
-          <div class="mark"><i class="fa-solid fa-ring"></i></div>
-          <h3>લગ્ન પ્રસંગ</h3>
-          <p>લગ્ન અને પારિવારિક કાર્યક્રમો માટે વ્યવસ્થિત આયોજન સાથે સંપૂર્ણ ડેરી સપ્લાય.</p>
+          <div class="card-content-top">
+            <div class="service-icon"><i class="fa-solid fa-ring"></i></div>
+            <h3>લગ્ન પ્રસંગ</h3>
+            <p>લગ્ન અને પારિવારિક કાર્યક્રમો માટે વ્યક્તિગત આયોજન સાથે સંપૂર્ણ ડેરી સપ્લાય.</p>
+          </div>
+          <div class="card-body-bottom">
+            <span class="service-arrow-btn"><i class="fa-solid fa-arrow-right"></i></span>
+            <img src="amulimage/લગ્ન પ્રસંગ.png" alt="લગ્ન પ્રસંગ" class="service-card-art-img">
+          </div>
+          <div class="card-bottom-wave"></div>
         </div>
+
+        <!-- Service 3: Padyatra Sangh -->
         <div class="service-card">
-          <div class="mark"><i class="fa-solid fa-walking"></i></div>
-          <h3>પદયાત્રા સંઘ</h3>
-          <p>પદયાત્રા સંઘો માટે રસ્તામાં જરૂરી અમૂલ ઉત્પાદનોની વ્યવસ્થા, સમયસર ડિલિવરી સાથે.</p>
+          <div class="card-content-top">
+            <div class="service-icon"><i class="fa-solid fa-person-walking"></i></div>
+            <h3>પદયાત્રા સંઘ</h3>
+            <p>પદયાત્રા સંઘો માટે રસ્તામાં જરૂરી અમૂલ ઉત્પાદનોની વ્યવસ્થા, સમયસર ડિલિવરી સાથે.</p>
+          </div>
+          <div class="card-body-bottom">
+            <span class="service-arrow-btn"><i class="fa-solid fa-arrow-right"></i></span>
+            <img src="amulimage/પદયાત્રા સંઘ.png" alt="પદયાત્રા સંઘ" class="service-card-art-img">
+          </div>
+          <div class="card-bottom-wave"></div>
+        </div>
+      </div>
+
+      <!-- Bottom Trust Feature Pill Bar -->
+      <div class="services-trust-pill">
+        <!-- Feature 1 -->
+        <div class="pill-feature-item">
+          <div class="pill-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="pill-text">
+            <strong>100% ગુણવત્તાયુક્ત</strong>
+            <span>વિશ્વાસપાત્ર અમૂલ ગુણવત્તા</span>
+          </div>
+        </div>
+
+        <div class="pill-divider-line"></div>
+
+        <!-- Feature 2 -->
+        <div class="pill-feature-item">
+          <div class="pill-icon"><i class="fa-solid fa-truck"></i></div>
+          <div class="pill-text">
+            <strong>સમયસર ડિલિવરી</strong>
+            <span>સચોટ અને સમયસર સેવા</span>
+          </div>
+        </div>
+
+        <div class="pill-divider-line"></div>
+
+        <!-- Feature 3 -->
+        <div class="pill-feature-item">
+          <div class="pill-icon"><i class="fa-solid fa-headset"></i></div>
+          <div class="pill-text">
+            <strong>ગ્રાહક સહાય ઉપલબ્ધ</strong>
+            <span>અમારી ટીમ હંમેશા તમારી સાથે</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRODUCTS -->
+  <!-- PRODUCTS SECTION -->
   <section class="products">
+    <!-- Dairy Farm Outline Sketch -->
+    <svg class="farm-sketch-bg" viewBox="0 0 500 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 180 H490" stroke="#C1272D" stroke-width="1.2" stroke-opacity="0.3" />
+      <path d="M40 180 V110 L90 70 L140 110 V180 H40 Z" stroke="#C1272D" stroke-width="1.5" stroke-opacity="0.35" />
+      <path d="M70 180 V135 H110 V180" stroke="#C1272D" stroke-width="1.2" stroke-opacity="0.35" />
+      <path d="M80 95 L100 95 M90 85 V105" stroke="#C1272D" stroke-width="1.2" stroke-opacity="0.35" />
+      <path d="M150 180 V90 C150 75 180 75 180 90 V180" stroke="#C1272D" stroke-width="1.5" stroke-opacity="0.35" />
+      <path d="M150 110 H180 M150 130 H180 M150 150 H180" stroke="#C1272D" stroke-width="1" stroke-opacity="0.25" />
+      <path d="M210 180 L225 120 L240 180" stroke="#C1272D" stroke-width="1.2" stroke-opacity="0.3" />
+      <path d="M225 120 L205 105 M225 120 L245 105 M225 120 L225 95" stroke="#C1272D" stroke-width="1.2"
+        stroke-opacity="0.3" />
+      <circle cx="270" cy="155" r="18" stroke="#C1272D" stroke-width="1.2" stroke-opacity="0.3" />
+      <path d="M270 180 V173" stroke="#C1272D" stroke-width="1.2" stroke-opacity="0.3" />
+      <path
+        d="M300 180 V165 C305 160 315 160 325 162 C335 158 355 158 365 165 V180 M310 180 V170 M355 180 V170 M365 162 C372 160 378 150 375 145 C370 142 365 152 360 155"
+        stroke="#C1272D" stroke-width="1.5" stroke-opacity="0.4" />
+      <path d="M330 162 C333 166 342 166 345 162" fill="#C1272D" fill-opacity="0.25" />
+      <path d="M20 180 V170 C24 167 32 167 38 170 V180 M28 170 C30 165 35 165 37 170" stroke="#C1272D"
+        stroke-width="1.2" stroke-opacity="0.35" />
+      <path d="M0 165 H40 M180 165 H210 M280 165 H300" stroke="#C1272D" stroke-width="1" stroke-dasharray="4 4"
+        stroke-opacity="0.3" />
+    </svg>
+
     <div class="wrap">
-      <div class="section-head">
-        <div class="kicker">અમારા ઉત્પાદનો</div>
-        <h2>અમૂલના તમામ તાજા ડેરી ઉત્પાદનો એક જ સ્થળે</h2>
+      <!-- Top Brand Badge -->
+      <div class="amul-brand-badge">
+        <div class="badge-box">Amul</div>
+        <span class="badge-line"></span>
       </div>
+
+      <!-- Section Header -->
+      <div class="products-header">
+        <div class="kicker">અમારા ઉત્પાદનો</div>
+        <h2>અમૂલના તમામ તાજા ડેરી ઉત્પાદનો <br>
+          <span class="highlight-call">એક જ સ્થાને
+            <span class="burst-rays"><span></span><span></span><span></span></span>
+          </span>
+        </h2>
+      </div>
+
+      <!-- 12-Product Grid -->
       <div class="product-grid">
+        <!-- 1. Ice Cream -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-ice-cream"></i></div>
           <div class="img-wrap">
             <img src="amulimage/ice-cream.png" alt="આઈસ્ક્રીમ">
           </div>
-          <h3>આઈસ્ક્રીમ</h3>
+          <div class="card-footer">
+            <h3>આઈસ્ક્રીમ</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 2. Shrikhand -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-bowl-food"></i></div>
           <div class="img-wrap">
             <img src="amulimage/Shrikhand.png" alt="શ્રીખંડ">
           </div>
-          <h3>શ્રીખંડ</h3>
+          <div class="card-footer">
+            <h3>શ્રીખંડ</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 3. Dudh / Milk -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-bottle-water"></i></div>
           <div class="img-wrap">
             <img src="amulimage/dudh.png" alt="દૂધ">
           </div>
-          <h3>દૂધ</h3>
+          <div class="card-footer">
+            <h3>દૂધ</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 4. Buttermilk / Chhash -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-glass-water"></i></div>
           <div class="img-wrap">
             <img src="amulimage/buttermilk.png" alt="છાશ">
           </div>
-          <h3>છાશ</h3>
+          <div class="card-footer">
+            <h3>છાશ</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 5. Dahi / Curd -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-jar"></i></div>
           <div class="img-wrap">
             <img src="amulimage/dahi.png" alt="દહીં">
           </div>
-          <h3>દહીં</h3>
+          <div class="card-footer">
+            <h3>દહીં</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 6. Paneer -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-cubes-stacked"></i></div>
           <div class="img-wrap">
             <img src="amulimage/Paneer.png" alt="પનીર">
           </div>
-          <h3>પનીર</h3>
+          <div class="card-footer">
+            <h3>પનીર</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 7. Makhan / Butter -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-cube"></i></div>
           <div class="img-wrap">
             <img src="amulimage/Butter.png" alt="માખણ">
           </div>
-          <h3>માખણ</h3>
+          <div class="card-footer">
+            <h3>માખણ</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 8. Ghee -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-jar"></i></div>
           <div class="img-wrap">
             <img src="amulimage/Ghee.png" alt="ઘી">
           </div>
-          <h3>ઘી</h3>
+          <div class="card-footer">
+            <h3>ઘી</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 9. Cheese -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-cheese"></i></div>
           <div class="img-wrap">
             <img src="amulimage/Cheese.png" alt="ચીઝ">
           </div>
-          <h3>ચીઝ</h3>
+          <div class="card-footer">
+            <h3>ચીઝ</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 10. Cream -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-blender"></i></div>
           <div class="img-wrap">
             <img src="amulimage/cream.png" alt="ક્રીમ">
           </div>
-          <h3>ક્રીમ</h3>
+          <div class="card-footer">
+            <h3>ક્રીમ</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 11. Lassi -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-wine-glass"></i></div>
           <div class="img-wrap">
             <img src="amulimage/Lassi.png" alt="લસ્સી">
           </div>
-          <h3>લસ્સી</h3>
+          <div class="card-footer">
+            <h3>લસ્સી</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+
+        <!-- 12. Mawa -->
         <div class="product-card">
+          <div class="card-top-icon"><i class="fa-solid fa-cookie"></i></div>
           <div class="img-wrap">
             <img src="amulimage/Mawa.png" alt="માવો">
           </div>
-          <h3>માવો</h3>
+          <div class="card-footer">
+            <h3>માવો</h3>
+            <span class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></span>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Products Bottom Curved Red Strip -->
+    <div class="products-bottom-strip">
+      <div class="banner-text">
+        અમૂલ - શુદ્ધતા, વિશ્વાસ અને સ્વાદની પરંપરા
       </div>
     </div>
   </section>
 
-  <!-- TRUST STRIP -->
-  <div class="trust">
-    <div class="wrap">
-      <p>ઉનાવા-ઊંઝા વિસ્તારમાં ઇવેન્ટ, લગ્ન અને પદયાત્રા સંઘો દ્વારા વારંવાર પસંદ કરાયેલ પાર્લર.</p>
-      <div class="tag">200+ સફળ ઓર્ડર</div>
-    </div>
-  </div>
+  <!-- FOOTER & CONTACT SECTION -->
+  <section class="footer-section" id="contact">
+    <!-- Dairy Farm Background Image -->
+    <img src="amulimage/bg-22imges.png" class="farm-sketch-bg" alt="Amul Dairy Farm & Cow Illustration">
 
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
     <div class="wrap">
-      <div class="section-head">
+      <!-- Top Brand Badge -->
+      <div class="amul-brand-badge">
+        <div class="badge-box">Amul</div>
+        <span class="badge-line"></span>
+      </div>
+
+      <!-- Footer Section Header -->
+      <div class="footer-header">
         <div class="kicker">સંપર્ક કરો</div>
-        <h2>ઓર્ડર બુક કરવા માટે અમને કૉલ કરો</h2>
+        <h2>ઓર્ડર બુક કરવા માટે <br>
+          <span class="highlight-call">અમને કૉલ કરો
+            <span class="burst-rays"><span></span><span></span><span></span></span>
+          </span>
+        </h2>
       </div>
-      <div class="contact-grid">
-        <div class="contact-cards">
-          <div class="person-card">
-            <div class="who">
-              <div class="role">સંપર્ક</div>
-              <div class="name">ચૌધરી જયેશ</div>
+
+      <!-- Main 2-Column Grid -->
+      <div class="footer-grid">
+        <!-- Left: Contact Cards -->
+        <div class="contact-cards-list">
+          <!-- Person 1 -->
+          <div class="contact-card-item">
+            <div class="user-avatar">
+              <i class="fa-regular fa-user"></i>
             </div>
-            <a class="call" href="tel:+919726017170">9726017170</a>
+            <div class="user-meta">
+              <span class="role-tag">સંપર્ક</span>
+              <h4 class="user-name">ચૌધરી જયેશ</h4>
+              <a class="phone-num" href="tel:+919726017170">
+                <i class="fa-solid fa-phone"></i> 97260 17170
+              </a>
+            </div>
+            <a class="call-action-btn" href="tel:+919726017170" aria-label="Call Jayesh">
+              <i class="fa-solid fa-phone"></i>
+            </a>
           </div>
-          <div class="person-card">
-            <div class="who">
-              <div class="role">સંપર્ક</div>
-              <div class="name">ચૌધરી જસુ</div>
+
+          <!-- Person 2 -->
+          <div class="contact-card-item">
+            <div class="user-avatar">
+              <i class="fa-regular fa-user"></i>
             </div>
-            <a class="call" href="tel:+919773028296">9773028296</a>
+            <div class="user-meta">
+              <span class="role-tag">સંપર્ક</span>
+              <h4 class="user-name">ચૌધરી જસુ</h4>
+              <a class="phone-num" href="tel:+919773028296">
+                <i class="fa-solid fa-phone"></i> 97730 28296
+              </a>
+            </div>
+            <a class="call-action-btn" href="tel:+919773028296" aria-label="Call Jasu">
+              <i class="fa-solid fa-phone"></i>
+            </a>
           </div>
         </div>
-        <div class="address-box">
-          <div class="lbl">સરનામું</div>
-          <p>અમૂલ પાર્લર<br>
-            ઉનાવા (ઊંઝા) બસ સ્ટોપ પાસે,<br>
-            કેબિનવાળા કોમ્પ્લેક્સ પાસે</p>
-          <a class="directions" href="https://www.google.com/maps/search/?api=1&query=Unava+Unjha+Bus+Stop+Amul+Parlor"
-            target="_blank" rel="noopener">દિશા-નિર્દેશ મેળવો →</a>
+
+        <!-- Right: Dealer Location & Product Showcase Card -->
+        <div class="dealer-showcase-card">
+          <div class="dealer-header">
+            <div class="store-icon-badge">
+              <i class="fa-solid fa-store"></i>
+            </div>
+            <h3>ડીલર માટે</h3>
+          </div>
+
+          <p class="dealer-address">
+            અમૂલ પાર્લર, ઉનાવા (ઊંઝા) બસ સ્ટોપ પાસે,<br>
+            કેબિનવાળા કોમ્પ્લેક્સ પાસે
+          </p>
+
+          <a class="dealer-directions-btn"
+            href="https://www.google.com/maps/search/?api=1&query=Unava+Unjha+Bus+Stop+Amul+Parlor" target="_blank"
+            rel="noopener">
+            <i class="fa-solid fa-location-dot"></i> દિશા-નિર્દેશ મેળવો →
+          </a>
+
+          <hr class="dealer-divider">
+
+          <!-- Product Showcase -->
+          <div class="product-showcase-box">
+            <img src="amulimage/footer.png" alt="Amul Products Trio" class="footer-hero-img">
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <footer>
-    © અમૂલ પાર્લર, ઉનાવા (ઊંઝા) — તમામ હકો સુરક્ષિત
-  </footer>
+    <!-- Bottom Curved Red Strip -->
+    <div class="bottom-red-strip">
+      <div class="trust-features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-badge-item">
+          <div class="icon-circle"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="badge-text">
+            <strong>વિશ્વાસની પરંપરા</strong>
+            <span>75+ વર્ષનો વિશ્વાસ</span>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-badge-item">
+          <div class="icon-circle"><i class="fa-solid fa-droplet"></i></div>
+          <div class="badge-text">
+            <strong>શુદ્ધ અને ગુણવત્તાસભર</strong>
+            <span>100% શુદ્ધ દૂધ ઉત્પાદનો</span>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-badge-item">
+          <div class="icon-circle"><i class="fa-solid fa-snowflake"></i></div>
+          <div class="badge-text">
+            <strong>તાજગીની ગેરંટી</strong>
+            <span>હંમેશા તાજા અને સ્વાદિષ્ટ</span>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-badge-item">
+          <div class="icon-circle"><i class="fa-solid fa-heart"></i></div>
+          <div class="badge-text">
+            <strong>દેશનો ગર્વ</strong>
+            <span>ભારતનું ગૌરવ, અમૂલ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer-bottom">
+        © અમૂલ પાર્લર, ઉનાવા (ઊંઝા) — તમામ હકો સુરક્ષિત
+      </div>
+    </div>
+  </section>
 
   <a class="sticky-call" href="tel:+919726017170"><i class="fa fa-phone"></i> હમણાં કૉલ કરો — 9726017170</a>
 
