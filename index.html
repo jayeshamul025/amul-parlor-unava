@@ -231,53 +231,134 @@
 
     /* ---------- STATS ---------- */
     .stats {
-      background: var(--red);
-      padding: 0;
+      position: relative;
+      z-index: 20;
+      margin-top: -42px;
+      padding-bottom: 24px;
     }
 
     .stats .wrap {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      max-width: 1080px;
+      gap: 22px;
+      max-width: 1100px;
       margin: 0 auto;
+      padding: 0 20px;
     }
 
-    .stat {
+    .stat-card {
+      border-radius: 20px;
+      padding: 32px 24px 28px;
       text-align: center;
-      padding: 52px 20px;
-      border-left: 1px solid rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .stat:first-child {
-      border-left: none;
+    .stat-card:hover {
+      transform: translateY(-8px);
     }
 
-    .stat .num {
-      color: var(--white);
+    .stat-card .icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover .icon-box {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .stat-card .num {
       font-weight: 800;
-      font-size: clamp(38px, 5vw, 54px);
-      line-height: 1;
+      font-size: clamp(38px, 4.5vw, 50px);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
     }
 
-    .stat .label {
-      color: rgba(255, 255, 255, 0.92);
+    .stat-card .label {
       font-weight: 600;
       font-size: 15.5px;
-      margin-top: 12px;
+      margin-top: 10px;
+      line-height: 1.4;
     }
 
-    @media (max-width:700px) {
+    /* Red Stat Card */
+    .stat-card.red-card {
+      background: linear-gradient(145deg, #C1272D 0%, #96171C 100%);
+      color: var(--white);
+      box-shadow: 0 12px 28px rgba(193, 39, 45, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-card.red-card .icon-box {
+      background: rgba(255, 255, 255, 0.18);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-card.red-card .num {
+      color: var(--white);
+    }
+
+    .stat-card.red-card .label {
+      color: rgba(255, 255, 255, 0.94);
+    }
+
+    .stat-card.red-card:hover {
+      box-shadow: 0 18px 36px rgba(193, 39, 45, 0.38);
+    }
+
+    /* White Stat Card (Middle) */
+    .stat-card.white-card {
+      background: #ffffff;
+      color: var(--ink);
+      box-shadow: 0 14px 34px rgba(34, 21, 16, 0.12);
+      border: 1px solid rgba(193, 39, 45, 0.12);
+
+    }
+
+    .stat-card.white-card .icon-box {
+      background: rgba(193, 39, 45, 0.09);
+      color: var(--red);
+    }
+
+    .stat-card.white-card .num {
+      color: var(--red);
+    }
+
+    .stat-card.white-card .label {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .stat-card.white-card:hover {
+      box-shadow: 0 20px 42px rgba(193, 39, 45, 0.18);
+      border-color: rgba(193, 39, 45, 0.3);
+    }
+
+    @media (max-width:768px) {
+      .stats {
+        margin-top: -24px;
+      }
+
       .stats .wrap {
         grid-template-columns: 1fr;
+        gap: 16px;
       }
 
-      .stat {
-        border-left: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.22);
-      }
-
-      .stat:first-child {
-        border-top: none;
+      .stat-card {
+        padding: 24px 20px;
       }
     }
 
@@ -350,58 +431,84 @@
 
     /* ---------- PRODUCTS ---------- */
     .products {
-      background: var(--white);
+      background: var(--cream);
     }
 
     .product-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 22px;
     }
 
-    @media (max-width:820px) {
+    @media (max-width:960px) {
       .product-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
       }
     }
 
-    @media (max-width:560px) {
+    @media (max-width:600px) {
       .product-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
       }
     }
 
     .product-card {
-      background: var(--cream);
+      background: var(--white);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 26px 16px;
+      border-radius: 18px;
+      padding: 18px 14px 16px;
       text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      box-shadow: 0 4px 14px rgba(34, 21, 16, 0.05);
+      position: relative;
     }
 
     .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(34, 21, 16, 0.1);
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(193, 39, 45, 0.14);
+      border-color: rgba(193, 39, 45, 0.3);
     }
 
-    .product-card .mark {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: rgba(193, 39, 45, 0.1);
-      color: var(--red);
+    .product-card .img-wrap {
+      width: 100%;
+      height: 120px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      margin: 0 auto 14px;
+      margin-bottom: 12px;
+      background: #faf7f2;
+      border-radius: 14px;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .product-card .img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+    }
+
+    .product-card:hover .img-wrap img {
+      transform: scale(1.12);
     }
 
     .product-card h3 {
       font-size: 16px;
       font-weight: 700;
       color: var(--ink);
+      margin-top: 2px;
     }
 
     /* ---------- TRUST STRIP ---------- */
@@ -611,15 +718,21 @@
   <!-- STATS -->
   <div class="stats">
     <div class="wrap">
-      <div class="stat">
+      <!-- Card 1: Red -->
+      <div class="stat-card red-card">
+        <div class="icon-box"><i class="fa-solid fa-champagne-glasses"></i></div>
         <div class="num">100+</div>
         <div class="label">ઇવેન્ટ ઓર્ડર પૂર્ણ</div>
       </div>
-      <div class="stat">
+      <!-- Card 2: White -->
+      <div class="stat-card white-card">
+        <div class="icon-box"><i class="fa-solid fa-heart"></i></div>
         <div class="num">50+</div>
         <div class="label">લગ્ન પ્રસંગોમાં સેવા</div>
       </div>
-      <div class="stat">
+      <!-- Card 3: Red -->
+      <div class="stat-card red-card">
+        <div class="icon-box"><i class="fa-solid fa-person-walking-luggage"></i></div>
         <div class="num">50+</div>
         <div class="label">પદયાત્રા સંઘ માટે ઓર્ડર</div>
       </div>
@@ -662,51 +775,75 @@
       </div>
       <div class="product-grid">
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-ice-cream"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/ice-cream.png" alt="આઈસ્ક્રીમ">
+          </div>
           <h3>આઈસ્ક્રીમ</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-bowl-food"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/Shrikhand.png" alt="શ્રીખંડ">
+          </div>
           <h3>શ્રીખંડ</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-glass-water"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/dudh.png" alt="દૂધ">
+          </div>
           <h3>દૂધ</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-mug-saucer"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/buttermilk.png" alt="છાશ">
+          </div>
           <h3>છાશ</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-bowl-rice"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/dahi.png" alt="દહીં">
+          </div>
           <h3>દહીં</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-cheese"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/Paneer.png" alt="પનીર">
+          </div>
           <h3>પનીર</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-cube"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/Butter.png" alt="માખણ">
+          </div>
           <h3>માખણ</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-jar"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/Ghee.png" alt="ઘી">
+          </div>
           <h3>ઘી</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-cheese"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/Cheese.png" alt="ચીઝ">
+          </div>
           <h3>ચીઝ</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-blender"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/cream.png" alt="ક્રીમ">
+          </div>
           <h3>ક્રીમ</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-glass-water-droplet"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/Lassi.png" alt="લસ્સી">
+          </div>
           <h3>લસ્સી</h3>
         </div>
         <div class="product-card">
-          <div class="mark"><i class="fa-solid fa-cookie"></i></div>
+          <div class="img-wrap">
+            <img src="amulimage/Mawa.png" alt="માવો">
+          </div>
           <h3>માવો</h3>
         </div>
       </div>
